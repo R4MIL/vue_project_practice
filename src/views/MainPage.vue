@@ -1,5 +1,5 @@
 <template>
-  <HeaderBlock />
+  <HeaderBlock title="НАША ПРОДУКЦИЯ" />
   <MainBlock />
 </template>
 

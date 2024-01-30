@@ -1,7 +1,6 @@
 <template>
-  <button class="button">+</button>
+  <button class="button">{{ text }}</button>
 </template>
-
 <script>
 
 export default {
@@ -9,6 +8,42 @@ export default {
   components: {
   },
   props: {
+    rotate: {
+      type: String,
+      default: '0deg'
+    },
+    color: {
+      type: String,
+      default: 'var(--color-main)'
+    },
+    text: {
+      type: String,
+      default: '+'
+    },
+    width: {
+      type: String,
+      default: '30px'
+    },
+    height: {
+      type: String,
+      default: '30px'
+    },
+    borderRadius: {
+      type: String,
+      default: '50%'
+    },
+    background: {
+      type: String,
+      default: 'transparent'
+    },
+    fontSize: {
+      type: String,
+      default: '27px'
+    },
+    fontWeight: {
+      type: String,
+      default: '400'
+    }
   },
   setup () {
     return {
@@ -19,19 +54,23 @@ export default {
 
 <style lang="scss" scoped>
     .button {
-        width: 30px;
-        height: 30px;
-        background: transparent;
-        border-radius: 50%;
-        border: 1px solid #FFF;
-        color: #FFF;
+        width: v-bind(width);
+        height: v-bind(height);
+        background: v-bind(background);
+        border-radius: v-bind(borderRadius);
+        border: 1px solid v-bind(color);
+        color: v-bind(color);
+        transform: rotate(v-bind(rotate));
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 27px;
+        font-size: v-bind(fontSize);
+        font-weight: v-bind(fontWeight);
+        cursor: pointer;
         &:hover {
-            background: #D58C51;
+            background: var(--color-dynamic);
             border: none;
+            color: var(--color-main);
         }
     }
 </style>

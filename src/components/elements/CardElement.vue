@@ -1,13 +1,34 @@
 <template>
-    <div class="product">
+    <div :class="{
+      'product': true,
+      'basket': basketList
+    }">
         <img :src="preview" alt="image" class="product__image">
-        <div class="product__info">
-            <h2 class="product__name">{{name}}</h2>
-            <p class="product__description">{{description}}</p>
+        <div :class="{
+          'product__info': true,
+          'basket__info': basketList
+        }">
+            <h2 :class="{
+              'product__name': true,
+              'basket__name': basketList
+            }">{{name}}</h2>
+            <p :class="{
+              'product__description': true,
+              'basket__description': basketList
+            }">{{description}}</p>
         </div>
-        <div class="product__footer">
-            <h2 class="product__price">{{`${price} ₽`}}</h2>
-            <ButtionUI />
+        <div :class="{
+          'product__footer': true,
+          'basket__footer': basketList
+        }">
+            <h2 :class="{
+              'product__price': true,
+              'basket__price': basketList
+            }">{{`${price} ₽`}}</h2>
+            <ButtionUI
+              :rotate="buttonRotate"
+              :color="buttonColor"
+            />
         </div>
     </div>
 </template>
@@ -36,6 +57,26 @@ export default {
     price: {
       type: String,
       default: ''
+    },
+    imgHeight: {
+      type: String,
+      default: '271px'
+    },
+    imgWidth: {
+      type: String,
+      default: '270px'
+    },
+    basketList: {
+      type: Boolean,
+      default: false
+    },
+    buttonRotate: {
+      type: String,
+      default: '0deg'
+    },
+    buttonColor: {
+      type: String,
+      default: 'var(--color-main)'
     }
   },
   setup () {
@@ -49,21 +90,21 @@ export default {
     .product {
         width: 312px;
         height: 477px;
-        border: 1px solid #D58C51;
+        border: 1px solid var(--color-dynamic);
         padding: 43px 0px 32px 0px;
         display: flex;
         flex-direction: column;
         align-items: center;
         background: transparent;
-        color: #FFF;
+        color: var(--color-main);
         font-size: 17px;
         font-weight: 500;
         &:hover {
-            color: #D58C51;
+            color: var(--color-dynamic);
         }
         &__image {
-            width: 270px;
-            height: 271px;
+            width: v-bind(imgWidth);
+            height: v-bind(imgHeight);
         }
         &__info {
             margin-top: 31px;
@@ -83,5 +124,33 @@ export default {
             align-items: center;
             justify-content: space-between;
         }
+    }
+    .basket {
+      padding: 0;
+      flex-direction: row;
+      border: none;
+      width: 895px;
+      height: 130px;
+      &__info {
+        margin-top: 0;
+        margin-left: 98px;
+      }
+      &__name {
+        width: 310px;
+      }
+      &__description {
+        display: none;
+      }
+      &__footer {
+        margin-top: 0;
+        margin-left: 262px;
+        justify-content: center;
+        gap: 15px;
+      }
+      &__price {
+        width: 100px;
+        text-align: right;
+        color: var(--color-dynamic);
+      }
     }
 </style>
