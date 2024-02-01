@@ -19,8 +19,8 @@
       'basket__action': basketList
     }">
         <div class="header__info">
-            <p class="header__text">3 товара</p>
-            <p class="header__text">на сумму 3 500 ₽</p>
+            <p class="header__text">{{ productsCount }} товара</p>
+            <p class="header__text">на сумму {{ productsAmount.toLocaleString() }} ₽</p>
         </div>
         <router-link to="/basket">
           <basketIcon />
@@ -32,6 +32,8 @@
 <script>
 import basketIcon from '@/components/icons/basketIcon.vue'
 import ButtionUI from '@/components/ui/ButtonUI.vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
   name: 'HeaderBlock',
@@ -50,7 +52,16 @@ export default {
     }
   },
   setup () {
+    const store = useStore()
+    const productsAmount = computed(() => {
+      return store.getters.getAllPricePoductsInBasket
+    })
+    const productsCount = computed(() => {
+      return store.getters.getCountProductsInBasket
+    })
     return {
+      productsAmount,
+      productsCount
     }
   }
 }

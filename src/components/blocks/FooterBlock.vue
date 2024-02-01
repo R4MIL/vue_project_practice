@@ -4,7 +4,7 @@
     <div class="footer__action">
         <div class="footer__info">
             <span>ЗАКАЗ НА СУММУ:</span>
-            <span class="footer__amount">6 220 ₽</span>
+            <span class="footer__amount">{{ productsAmount.toLocaleString() }} ₽</span>
         </div>
         <ButtionUI
         text="Оформить заказ"
@@ -12,7 +12,9 @@
         height="42px"
         borderRadius="0%"
         background="var(--color-dynamic)"
+        backgroundHover="transparent"
         color="#131313"
+        colorHover="var(--color-dynamic)"
         fontSize="14px"
         />
     </div>
@@ -21,6 +23,8 @@
 
 <script>
 import ButtionUI from '@/components/ui/ButtonUI.vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
   name: 'FooterBlock',
@@ -30,7 +34,12 @@ export default {
   props: {
   },
   setup () {
+    const store = useStore()
+    const productsAmount = computed(() => {
+      return store.getters.getAllPricePoductsInBasket
+    })
     return {
+      productsAmount
     }
   }
 }

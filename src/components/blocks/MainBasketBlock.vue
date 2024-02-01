@@ -1,6 +1,6 @@
 <template>
   <main class="container main">
-    <CardElement v-for="product in products" :key="product.id"
+    <CardElement v-for="product in basketProducts" :key="product.id"
       :name="product.name"
       :description="product.description"
       :price="product.price"
@@ -16,7 +16,8 @@
 
 <script>
 import CardElement from '@/components/elements/CardElement.vue'
-import ProductsData from '@/assets/products.json'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
   name: 'MainBasketBlock',
@@ -26,9 +27,12 @@ export default {
   props: {
   },
   setup () {
-    const products = ProductsData.filter(item => { return [1, 3, 6].includes(item.id) })
+    const store = useStore()
+    const basketProducts = computed(() => {
+      return store.getters.getBasketProducts
+    })
     return {
-      products
+      basketProducts
     }
   }
 }
@@ -43,5 +47,7 @@ export default {
         flex-direction: column;
         align-items: center;
         row-gap: 31px;
+        min-height: calc(100vh - 375px);
+        height: 100%;
     }
 </style>

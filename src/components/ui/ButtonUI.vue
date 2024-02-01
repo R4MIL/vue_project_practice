@@ -16,6 +16,10 @@ export default {
       type: String,
       default: 'var(--color-main)'
     },
+    colorHover: {
+      type: String,
+      default: 'var(--color-main)'
+    },
     text: {
       type: String,
       default: '+'
@@ -32,9 +36,17 @@ export default {
       type: String,
       default: '50%'
     },
+    borderColorHover: {
+      type: String,
+      default: 'var(--color-dynamic)'
+    },
     background: {
       type: String,
       default: 'transparent'
+    },
+    backgroundHover: {
+      type: String,
+      default: 'var(--color-dynamic)'
     },
     fontSize: {
       type: String,
@@ -68,9 +80,9 @@ export default {
         font-weight: v-bind(fontWeight);
         cursor: pointer;
         &:hover {
-            background: var(--color-dynamic);
-            border: none;
-            color: var(--color-main);
+            background: v-bind(backgroundHover);
+            border-color: v-bind(borderColorHover);
+            color: v-bind(colorHover);
         }
     }
 </style>

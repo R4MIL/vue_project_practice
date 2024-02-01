@@ -11,7 +11,8 @@
 
 <script>
 import CardElement from '@/components/elements/CardElement.vue'
-import ProductsData from '@/assets/products.json'
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 
 export default {
   name: 'MainBlock',
@@ -21,7 +22,10 @@ export default {
   props: {
   },
   setup () {
-    const products = ProductsData
+    const store = useStore()
+    const products = computed(() => {
+      return store.getters.getProducts
+    })
     return {
       products
     }
@@ -38,5 +42,7 @@ export default {
         flex-wrap: wrap;
         row-gap: 35px;
         column-gap: 20px;
+        min-height: calc(100vh - 257px);
+        height: 100%;
     }
 </style>
