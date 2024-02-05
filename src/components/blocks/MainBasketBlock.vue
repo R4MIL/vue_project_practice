@@ -10,6 +10,7 @@
       basketList
       buttonRotate="45deg"
       buttonColor="var(--color-dynamic)"
+      @clickButton="deleteFromBasket(product.id)"
     />
   </main>
 </template>
@@ -31,8 +32,12 @@ export default {
     const basketProducts = computed(() => {
       return store.getters.getBasketProducts
     })
+    const deleteFromBasket = (id) => {
+      store.commit('SetDeleteBasketProducts', id)
+    }
     return {
-      basketProducts
+      basketProducts,
+      deleteFromBasket
     }
   }
 }

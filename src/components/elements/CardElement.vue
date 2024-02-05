@@ -24,8 +24,8 @@
             <h2 :class="{
               'product__price': true,
               'basket__price': basketList
-            }">{{`${price} ₽`}}</h2>
-            <ButtionUI
+            }">{{`${price.toLocaleString()} ₽`}}</h2>
+            <ButtionUI @click="$emit('clickButton')"
               :rotate="buttonRotate"
               :color="buttonColor"
             />
@@ -55,8 +55,8 @@ export default {
       default: ''
     },
     price: {
-      type: String,
-      default: ''
+      type: Number,
+      default: 0
     },
     imgHeight: {
       type: String,

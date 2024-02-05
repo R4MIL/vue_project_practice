@@ -5,6 +5,7 @@
       :description="product.description"
       :price="product.price"
       :preview="require(`@/assets/images/${product.image}`)"
+      @clickButton="addToBasket(product.id)"
     />
   </main>
 </template>
@@ -26,8 +27,12 @@ export default {
     const products = computed(() => {
       return store.getters.getProducts
     })
+    const addToBasket = (id) => {
+      store.commit('SetAddBasketProducts', id)
+    }
     return {
-      products
+      products,
+      addToBasket
     }
   }
 }
