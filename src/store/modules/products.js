@@ -21,11 +21,7 @@ export default {
       state.allPricePoductsInBasket = state.basketProducts.reduce((sum, item) => sum + item.price, 0)
     },
     SetDeleteBasketProducts (state, val) {
-      state.basketProducts.forEach((product, index) => {
-        if (product.id === val) {
-          state.basketProducts.splice(index, 1)
-        }
-      })
+      state.basketProducts.splice(val, 1)
       state.countProductsInBasket = state.basketProducts.length
       state.allPricePoductsInBasket = state.basketProducts.reduce((sum, item) => sum + item.price, 0)
     }
