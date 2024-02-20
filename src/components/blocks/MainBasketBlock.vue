@@ -10,6 +10,7 @@
       basketList
       buttonRotate="45deg"
       buttonColor="var(--color-dynamic)"
+      buttonText="+"
       @clickButton="deleteFromBasket(index)"
     />
   </main>

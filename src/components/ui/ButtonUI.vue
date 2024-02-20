@@ -1,5 +1,8 @@
 <template>
-  <button class="button">{{ text }}</button>
+  <button :class="{
+    'button': true,
+    'buttonRectangle': rectangle
+  }">{{ text }}</button>
 </template>
 <script>
 
@@ -16,45 +19,13 @@ export default {
       type: String,
       default: 'var(--color-main)'
     },
-    colorHover: {
-      type: String,
-      default: 'var(--color-main)'
-    },
     text: {
       type: String,
       default: '+'
     },
-    width: {
-      type: String,
-      default: '30px'
-    },
-    height: {
-      type: String,
-      default: '30px'
-    },
-    borderRadius: {
-      type: String,
-      default: '50%'
-    },
-    borderColorHover: {
-      type: String,
-      default: 'var(--color-dynamic)'
-    },
-    background: {
-      type: String,
-      default: 'transparent'
-    },
-    backgroundHover: {
-      type: String,
-      default: 'var(--color-dynamic)'
-    },
-    fontSize: {
-      type: String,
-      default: '27px'
-    },
-    fontWeight: {
-      type: String,
-      default: '400'
+    rectangle: {
+      type: Boolean,
+      default: false
     }
   },
   setup () {
@@ -66,23 +37,43 @@ export default {
 
 <style lang="scss" scoped>
     .button {
-        width: v-bind(width);
-        height: v-bind(height);
-        background: v-bind(background);
-        border-radius: v-bind(borderRadius);
+        width: 30px;
+        height: 30px;
+        background: transparent;
+        border-radius: 50%;
         border: 1px solid v-bind(color);
         color: v-bind(color);
         transform: rotate(v-bind(rotate));
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: v-bind(fontSize);
-        font-weight: v-bind(fontWeight);
+        font-size: 27px;
+        font-weight: 400;
         cursor: pointer;
         &:hover {
-            background: v-bind(backgroundHover);
-            border-color: v-bind(borderColorHover);
-            color: v-bind(colorHover);
+          background: var(--color-dynamic);
+          border-color: var(--color-dynamic);
+          color: var(--color-main);
         }
+    }
+
+    .buttonRectangle {
+      width: 200px;
+      height: 42px;
+      background: var(--color-dynamic);
+      border-radius: 0%;
+      border: 1px solid #131313;
+      color: #131313;
+      transform: rotate(v-bind(rotate));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      &:hover {
+          background: transparent;
+          border-color: var(--color-dynamic);
+          color: var(--color-dynamic);
+      }
     }
 </style>

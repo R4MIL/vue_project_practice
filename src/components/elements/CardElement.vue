@@ -1,16 +1,25 @@
 <template>
-    <div :class="{
-      'product': true,
-      'basket': basketList
-    }">
-        <img :src="preview" alt="image" class="product__image">
+  <div :class="{
+    'product': true,
+    'basket': basketList,
+    'description': descriptionItem
+
+  }">
+      <img :src="preview" alt="image" class="product__image">
+      <div :class="{
+        'product__content': true,
+        'basket__content': basketList,
+        'description__content': descriptionItem
+      }">
         <div :class="{
           'product__info': true,
-          'basket__info': basketList
+          'basket__info': basketList,
+          'description__info': descriptionItem
         }">
             <h2 :class="{
               'product__name': true,
-              'basket__name': basketList
+              'basket__name': basketList,
+              'description__name': descriptionItem
             }">{{name}}</h2>
             <p :class="{
               'product__description': true,
@@ -19,18 +28,23 @@
         </div>
         <div :class="{
           'product__footer': true,
-          'basket__footer': basketList
+          'basket__footer': basketList,
+          'description__footer': descriptionItem
         }">
             <h2 :class="{
               'product__price': true,
-              'basket__price': basketList
+              'basket__price': basketList,
+              'description__price': descriptionItem
             }">{{`${price.toLocaleString()} ₽`}}</h2>
-            <ButtionUI @click="$emit('clickButton')"
+            <ButtionUI @click.stop="$emit('clickButton')"
               :rotate="buttonRotate"
               :color="buttonColor"
+              :text="buttonText"
+              :rectangle="buttonRectangle"
             />
         </div>
-    </div>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -70,6 +84,10 @@ export default {
       type: Boolean,
       default: false
     },
+    descriptionItem: {
+      type: Boolean,
+      default: false
+    },
     buttonRotate: {
       type: String,
       default: '0deg'
@@ -77,11 +95,17 @@ export default {
     buttonColor: {
       type: String,
       default: 'var(--color-main)'
+    },
+    buttonRectangle: {
+      type: Boolean,
+      default: false
+    },
+    buttonText: {
+      type: String,
+      default: ''
     }
   },
   setup () {
-    return {
-    }
   }
 }
 </script>
@@ -105,6 +129,11 @@ export default {
         &__image {
             width: v-bind(imgWidth);
             height: v-bind(imgHeight);
+        }
+        &__content {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
         }
         &__info {
             margin-top: 31px;
@@ -131,6 +160,15 @@ export default {
       border: none;
       width: 895px;
       height: 130px;
+      &:hover {
+        color: var(--color-main);
+      }
+      &__content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 770px;
+      }
       &__info {
         margin-top: 0;
         margin-left: 98px;
@@ -151,6 +189,39 @@ export default {
         width: 100px;
         text-align: right;
         color: var(--color-dynamic);
+      }
+    }
+    .description {
+      padding: 0;
+      flex-direction: row;
+      border: none;
+      width: 895px;
+      height: 130px;
+      &:hover {
+        color: var(--color-main);
+      }
+      &__content {
+        margin-left: 150px;
+      }
+      &__info {
+        margin-top: 0;
+        width: 400px;
+        gap: 20px;
+      }
+      &__name {
+        width: 400px;
+        font-size: 30px;
+        color: var(--color-dynamic);
+      }
+      &__footer {
+        margin-top: 50px;
+        justify-content: flex-start;
+        gap: 100px;
+        width: 100%;
+      }
+      &__price {
+        text-align: start;
+        font-size: 23px;
       }
     }
 </style>

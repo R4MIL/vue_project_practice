@@ -24,6 +24,10 @@ export default {
       state.basketProducts.splice(val, 1)
       state.countProductsInBasket = state.basketProducts.length
       state.allPricePoductsInBasket = state.basketProducts.reduce((sum, item) => sum + item.price, 0)
+    },
+    SetProductDescription (state, val) {
+      const product = state.products.find(product => product.id === val)
+      state.products = product
     }
   },
   actions: {

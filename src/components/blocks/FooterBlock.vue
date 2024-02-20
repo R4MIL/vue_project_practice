@@ -7,15 +7,8 @@
             <span class="footer__amount">{{ productsAmount.toLocaleString() }} ₽</span>
         </div>
         <ButtionUI
-        text="Оформить заказ"
-        width="200px"
-        height="42px"
-        borderRadius="0%"
-        background="var(--color-dynamic)"
-        backgroundHover="transparent"
-        color="#131313"
-        colorHover="var(--color-dynamic)"
-        fontSize="14px"
+          text="Оформить заказ"
+          rectangle
         />
     </div>
   </footer>

@@ -2,17 +2,19 @@
   <header :class="{
     'container': true,
     'header': true,
-    'basket': basketList
+    'basket': basketList,
+    'description': descriptionItem
   }">
-    <router-link to="/" :class="{
-      'header__button': true,
-      'basket__button': basketList
-    }">
-      <ButtionUI
-        text="←"
-        color="var(--color-dynamic)"
-      />
-    </router-link>
+    <ButtionUI
+      :class="{
+        'header__button': true,
+        'basket__button': basketList,
+        'description__button': descriptionItem
+      }"
+      text="←"
+      color="var(--color-dynamic)"
+      @click.stop="router.back()"
+    />
     <h1 class="header__title">{{ title }}</h1>
     <div :class="{
       'header__action': true,
@@ -34,6 +36,7 @@ import basketIcon from '@/components/icons/basketIcon.vue'
 import ButtionUI from '@/components/ui/ButtonUI.vue'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'HeaderBlock',
@@ -46,6 +49,10 @@ export default {
       type: Boolean,
       default: false
     },
+    descriptionItem: {
+      type: Boolean,
+      default: false
+    },
     title: {
       type: String,
       default: ''
@@ -53,6 +60,8 @@ export default {
   },
   setup () {
     const store = useStore()
+    const router = useRouter()
+
     const productsAmount = computed(() => {
       return store.getters.getAllPricePoductsInBasket
     })
@@ -60,6 +69,7 @@ export default {
       return store.getters.getCountProductsInBasket
     })
     return {
+      router,
       productsAmount,
       productsCount
     }
@@ -103,7 +113,16 @@ export default {
         display: none;
       }
       &__button {
-        display: block;
+        display: inline-flex;
+      }
+    }
+
+    .description {
+      background: transparent;
+      position: absolute;
+      width: calc(100vw - 140px);
+      &__button {
+        display: inline-flex;
       }
     }
 </style>
