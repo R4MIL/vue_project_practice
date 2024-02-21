@@ -13,20 +13,28 @@
       }"
       text="←"
       color="var(--color-dynamic)"
-      @click.stop="router.back()"
+      @click="router.back()"
     />
     <h1 class="header__title">{{ title }}</h1>
     <div :class="{
       'header__action': true,
-      'basket__action': basketList
     }">
-        <div class="header__info">
-            <p class="header__text">{{ productsCount }} товара</p>
-            <p class="header__text">на сумму {{ productsAmount.toLocaleString() }} ₽</p>
+        <div :class="{
+          'header__action': true,
+          'basket__action': basketList
+        }">
+          <div class="header__info">
+              <p class="header__text">{{ productsCount }} товара</p>
+              <p class="header__text">на сумму {{ productsAmount.toLocaleString() }} ₽</p>
+          </div>
+          <router-link to="/basket">
+            <basketIcon />
+          </router-link>
         </div>
-        <router-link to="/basket">
-          <basketIcon />
-        </router-link>
+        <ButtionUI
+          text="Выйти"
+          rectangleActive
+        />
     </div>
   </header>
 </template>

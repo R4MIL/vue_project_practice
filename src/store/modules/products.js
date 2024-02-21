@@ -28,6 +28,11 @@ export default {
     SetProductDescription (state, val) {
       const product = state.products.find(product => product.id === val)
       state.products = product
+    },
+    SetClearBasketProducts (state, val) {
+      state.basketProducts = []
+      state.countProductsInBasket = 0
+      state.allPricePoductsInBasket = 0
     }
   },
   actions: {
