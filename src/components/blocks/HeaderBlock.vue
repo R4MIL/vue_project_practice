@@ -34,6 +34,7 @@
         <ButtionUI
           text="Выйти"
           rectangleActive
+          @click="deautorization"
         />
     </div>
   </header>
@@ -76,10 +77,15 @@ export default {
     const productsCount = computed(() => {
       return store.getters.getCountProductsInBasket
     })
+    const deautorization = () => {
+      store.commit('SetDeautorization')
+      router.push('/auth')
+    }
     return {
       router,
       productsAmount,
-      productsCount
+      productsCount,
+      deautorization
     }
   }
 }

@@ -10,7 +10,9 @@
 
 <script>
 import AuthElement from '@/components/elements/AuthElement.vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'MainAutorizationPage',
@@ -20,12 +22,26 @@ export default {
   props: {
   },
   setup () {
+    const store = useStore()
+    const router = useRouter()
     const toggle = ref(false)
+
     const changeAuth = () => {
       toggle.value = !toggle.value
     }
-    const clickAction = (data) => {
-      console.log(data)
+    const auth = computed(() => {
+      return store.getters.getAuth
+    })
+    const clickAction = () => {
+      if (toggle.value) {
+        store.commit('SetRegistration')
+        changeAuth()
+      } else {
+        store.commit('SetAutorization')
+        if (auth.value) {
+          router.push('/')
+        }
+      }
     }
     return {
       toggle,

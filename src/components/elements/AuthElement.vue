@@ -28,7 +28,7 @@
         <ButtionUI
           :text="isRegistration ? 'Зарегистрироваться' : 'Войти'"
           rectangle
-          @click="$emit('clickAction',formData)"
+          @click="$emit('clickAction')"
         />
     </div>
   </div>
@@ -36,7 +36,8 @@
 
 <script>
 import ButtionUI from '@/components/ui/ButtonUI.vue'
-import { ref } from 'vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
   name: 'AuthElement',
@@ -49,11 +50,11 @@ export default {
     }
   },
   setup () {
-    const formData = ref({
-      login: '',
-      password: '',
-      isSendEmail: false
+    const store = useStore()
+    const formData = computed(() => {
+      return store.getters.getInputData
     })
+
     return {
       formData
     }

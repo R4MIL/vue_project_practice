@@ -3,9 +3,9 @@ import ProductsData from '@/modules/products.json'
 export default {
   state: {
     products: ProductsData,
-    basketProducts: [],
-    countProductsInBasket: 0,
-    allPricePoductsInBasket: 0
+    basketProducts: localStorage.getItem('basket') !== null ? JSON.parse(localStorage.basket) : [],
+    countProductsInBasket: localStorage.getItem('basket') !== null ? JSON.parse(localStorage.basket).length : 0,
+    allPricePoductsInBasket: localStorage.getItem('basket') !== null ? JSON.parse(localStorage.basket).reduce((sum, item) => sum + item.price, 0) : 0
   },
   getters: {
     getProducts: state => state.products,
@@ -17,11 +17,13 @@ export default {
     SetAddBasketProducts (state, val) {
       const product = state.products.find(product => product.id === val)
       state.basketProducts.push(product)
+      localStorage.setItem('basket', JSON.stringify(state.basketProducts))
       state.countProductsInBasket = state.basketProducts.length
       state.allPricePoductsInBasket = state.basketProducts.reduce((sum, item) => sum + item.price, 0)
     },
     SetDeleteBasketProducts (state, val) {
       state.basketProducts.splice(val, 1)
+      localStorage.setItem('basket', JSON.stringify(state.basketProducts))
       state.countProductsInBasket = state.basketProducts.length
       state.allPricePoductsInBasket = state.basketProducts.reduce((sum, item) => sum + item.price, 0)
     },
@@ -30,6 +32,7 @@ export default {
       state.products = product
     },
     SetClearBasketProducts (state, val) {
+      localStorage.removeItem('basket')
       state.basketProducts = []
       state.countProductsInBasket = 0
       state.allPricePoductsInBasket = 0
