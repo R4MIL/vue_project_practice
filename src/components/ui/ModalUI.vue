@@ -22,6 +22,9 @@ export default {
     },
     isVisible: {
       type: Boolean
+    },
+    background: {
+      type: String
     }
   },
   setup (props, { emit }) {
@@ -41,10 +44,10 @@ export default {
       display: none;
     }
     .modal-vue3-body {
-      background: #000;
+      background: v-bind(background);
     }
     .modal-vue3-footer {
-      background: #000;
+      background: v-bind(background);
       border-top: none !important;
       .modal-vue3-footer-cancel {
         display: none !important;
@@ -54,7 +57,7 @@ export default {
       }
     }
     &__content {
-      background: #000;
+      background: v-bind(background);
       color: var(--color-dynamic);
       font-size: 20px;
       font-weight: 600;

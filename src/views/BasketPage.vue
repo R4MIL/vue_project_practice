@@ -41,16 +41,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .header {
-      color: var(--color-main);
-      background: var(--color-main-background);
-      display: flex;
-      align-items: center;
-      gap: 63px;
-      padding-top: 53px;
-      &__title {
-          font-size: 31px;
-          font-weight: 700;
-      }
-    }
+
 </style>

@@ -47,14 +47,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .main {
-        height: 100vh;
-        background-image: url('@/assets/images/descriptionPage_background.png');
-        display: flex;
-        justify-content: center;
+  .main {
+    height: 100vh;
+    background-image: url('@/assets/images/descriptionPage_background.png');
+    display: flex;
+    justify-content: center;
 
-        &__card {
-            margin-top: clamp(340px, calc(50vh - 186px / 2), 100vh);
-        }
+    &__card {
+        margin-top: clamp(340px, calc(50vh - 186px / 2), 100vh);
     }
+  }
 </style>

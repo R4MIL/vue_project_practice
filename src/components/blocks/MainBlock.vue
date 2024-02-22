@@ -48,15 +48,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .main {
-        background: var(--color-main-background);
-        padding: 27px 68px 67px 70px;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        row-gap: 35px;
-        column-gap: 20px;
-        min-height: calc(100vh - 257px);
-        height: 100%;
-    }
+  .main {
+    background: var(--color-main-background);
+    padding: 27px 68px 67px 70px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 35px;
+    column-gap: 20px;
+    min-height: calc(100vh - 257px);
+    height: 100%;
+  }
 </style>

@@ -30,6 +30,7 @@ export default {
   },
   setup () {
     const store = useStore()
+
     const basketProducts = computed(() => {
       return store.getters.getBasketProducts
     })
@@ -45,15 +46,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    main {
-        background: var(--color-main-background);
-        padding: 38px 0px 102px 0px;
-        color: var(--color-main);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        row-gap: 31px;
-        min-height: calc(100vh - 375px);
-        height: 100%;
-    }
+  main {
+    background: var(--color-main-background);
+    padding: 38px 0px 102px 0px;
+    color: var(--color-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 31px;
+    min-height: calc(100vh - 375px);
+    height: 100%;
+  }
 </style>
