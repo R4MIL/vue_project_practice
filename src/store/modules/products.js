@@ -22,7 +22,7 @@ export default {
       state.allPricePoductsInBasket = state.basketProducts.reduce((sum, item) => sum + item.price, 0)
     },
     SetDeleteBasketProducts (state, val) {
-      state.basketProducts.splice(val, 1)
+      state.basketProducts = state.basketProducts.filter(product => product.id !== val)
       localStorage.setItem('basket', JSON.stringify(state.basketProducts))
       state.countProductsInBasket = state.basketProducts.length
       state.allPricePoductsInBasket = state.basketProducts.reduce((sum, item) => sum + item.price, 0)

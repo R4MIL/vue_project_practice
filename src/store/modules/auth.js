@@ -68,13 +68,18 @@ export default {
     SetAutorization (state, val) {
       state.errorData.login = state.inputData.login === '' ? 'Поле не должно быть пустым' : ''
       state.errorData.password = state.inputData.password === '' ? 'Поле не должно быть пустым' : ''
-      const userFind = state.registration.find(user =>
-        user.login === state.inputData.login && user.password === state.inputData.password
-      )
+      let userFind = false
+      state.registration.forEach(user => {
+        if (user.login === state.inputData.login && user.password === state.inputData.password) {
+          user.isSendEmail = state.inputData.isSendEmail
+          userFind = true
+        }
+      })
       if (state.errorData.login === '' && state.errorData.password === '') {
         if (userFind) {
           state.auth = true
           localStorage.setItem('auth', state.auth)
+          localStorage.setItem('registration', JSON.stringify(state.registration))
           state.errorData = {
             login: '',
             password: '',

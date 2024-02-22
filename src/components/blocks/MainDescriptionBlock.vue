@@ -8,9 +8,9 @@
       imgHeight="503px"
       imgWidth="501px"
       descriptionItem
-      buttonText="В корзину"
+      :buttonText="basketProducts.find(data => data.id === product.id) ? 'Убрать из корзины' : 'В корзину'"
       buttonRectangle
-      @clickButton="addToBasket(product.id)"
+      @clickButton="basketProducts.find(data => data.id === product.id) ? deleteFromBasket(product.id) : addToBasket(product.id)"
     />
   </main>
 </template>
@@ -35,12 +35,20 @@ export default {
     const products = computed(() => {
       return store.getters.getProducts.filter(item => { return item.id === Number(route.params.id) })
     })
+    const basketProducts = computed(() => {
+      return store.getters.getBasketProducts
+    })
     const addToBasket = (id) => {
       store.commit('SetAddBasketProducts', id)
     }
+    const deleteFromBasket = (id) => {
+      store.commit('SetDeleteBasketProducts', id)
+    }
     return {
       products,
-      addToBasket
+      basketProducts,
+      addToBasket,
+      deleteFromBasket
     }
   }
 }

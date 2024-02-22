@@ -6,7 +6,8 @@
       :price="product.price"
       :preview="require(`@/assets/images/${product.image}`)"
       buttonText="+"
-      @clickButton="addToBasket(product.id)"
+      :buttonRotate="basketProducts.find(data => data.id === product.id) ? '45deg' : '0deg'"
+      @clickButton="basketProducts.find(data => data.id === product.id) ? deleteFromBasket(product.id) : addToBasket(product.id)"
       @click="getDescriptionPage(product.id)"
     />
   </main>
@@ -32,15 +33,23 @@ export default {
     const products = computed(() => {
       return store.getters.getProducts
     })
+    const basketProducts = computed(() => {
+      return store.getters.getBasketProducts
+    })
     const addToBasket = (id) => {
       store.commit('SetAddBasketProducts', id)
+    }
+    const deleteFromBasket = (id) => {
+      store.commit('SetDeleteBasketProducts', id)
     }
     const getDescriptionPage = (id) => {
       router.push(`/description/${id}`)
     }
     return {
       products,
+      basketProducts,
       addToBasket,
+      deleteFromBasket,
       getDescriptionPage
     }
   }

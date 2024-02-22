@@ -1,6 +1,6 @@
 <template>
   <main class="container main">
-    <CardElement v-for="(product,index) in basketProducts" :key="product.id"
+    <CardElement v-for="product in basketProducts" :key="product.id"
       :name="product.name"
       :description="product.description"
       :price="product.price"
@@ -11,7 +11,7 @@
       buttonRotate="45deg"
       buttonColor="var(--color-dynamic)"
       buttonText="+"
-      @clickButton="deleteFromBasket(index)"
+      @clickButton="deleteFromBasket(product.id)"
     />
   </main>
 </template>
